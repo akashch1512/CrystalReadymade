@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
     'members',
 ]
 
@@ -133,5 +132,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'members/static'),
     os.path.join(BASE_DIR, 'shop/static'),
-    os.path.join(BASE_DIR, 'blog/static'),
 ] 
