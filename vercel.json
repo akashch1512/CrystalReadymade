@@ -1,13 +1,15 @@
 {
-    "builds": [{
-        "src": "CrystalReadymade/wsgi.py",
-        "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-    }],
+    "builds": [
+      {
+        "src": "CrystalReadymade/manage.py",
+        "use": "@vercel/python"
+      }
+    ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "CrystalReadymade/wsgi.py"
-        }
+      {
+        "src": "/static/(.*)",
+        "dest": "/static/$1"
+      }
     ]
-}
+  }
+  
