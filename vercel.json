@@ -1,24 +1,23 @@
 {
-    "builds": [
-      {
-        "src": "CrystalReadymade/wsgi.py",
-        "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-      }
-    ],
-    "routes": [
-      {
-        "src": "/static/(.*)",
-        "dest": "/static/$1"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "CrystalReadymade/wsgi.py"
-      }
-    ],
-    "static": {
+  "builds": [
+    {
+      "src": "CrystalReadymade/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+    }
+  ],
+  "routes": [
+    {
       "src": "/static/(.*)",
       "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "CrystalReadymade/wsgi.py"
     }
+  ],
+  "static": {
+    "src": "/static/(.*)",
+    "dest": "/static/$1"
   }
-  
+}
