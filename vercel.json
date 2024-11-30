@@ -15,6 +15,10 @@
         "src": "/(.*)",
         "dest": "CrystalReadymade/wsgi.py"
       }
-    ]
+    ],
+    "static": {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    }
   }
   
