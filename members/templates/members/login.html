@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="flex items-center justify-center bg-gray-100 min-h-screen font-poppins">
+
+<section class="flex flex-col md:flex-row min-h-screen items-center w-full">
+    <!-- Left Section: Image and Quote -->
+    <div class="hidden md:flex w-full md:w-1/2 h-screen relative">
+        <img 
+            src="{% static 'members/image/login_bg.jpg' %}" 
+            alt="Login Background" 
+            class="w-full h-full object-cover"
+        >
+        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <blockquote class="text-white text-center px-6">
+                <p class="text-2xl font-semibold">
+                    “Social media is about sociology and psychology more than technology.”
+                </p>
+                <footer class="mt-4 text-lg">— Brian Solis</footer>
+            </blockquote>
+        </div>
+    </div>
+
+    <!-- Mobile Section: Image on Top -->
+    <div class="block md:hidden w-full">
+        <img 
+            src="{% static 'members/image/login_bg.jpg' %}" 
+            alt="Login Background" 
+            class="w-full h-48 object-cover"
+        >
+    </div>
+
+    <!-- Right Section: Login Form -->
+    <div class="w-full md:w-1/2 bg-white flex flex-col justify-center items-center p-8 z-10">
+        <div class="formbx w-full max-w-md">
+            <h2 class="text-3xl font-bold text-center mb-6">Login to Crystal Readymade</h2>
+            <form method="POST" action="{% url 'login_view' %}">
+                {% csrf_token %}
+                
+                <!-- Username Field -->
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input 
+                    type="text" 
+                    name="username" 
+                    id="username" 
+                    placeholder="Enter Username" 
+                    required 
+                    class="block w-full px-3 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                >
+                
+                <!-- Password Field -->
+                <label for="password" class="block text-sm font-medium text-gray-700 mt-4">Password</label>
+                <input 
+                    type="password" 
+                    name="password" 
+                    id="password" 
+                    placeholder="Enter Password" 
+                    required 
+                    class="block w-full px-3 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                >
+                
+                <!-- Remember Me Checkbox -->
+                <div class="flex items-center mt-4">
+                    <input 
+                        type="checkbox" 
+                        name="remember_me" 
+                        id="remember_me" 
+                        class="h-4 w-4 text-blue-600 focus:ring-pink-500 border-gray-300 rounded"
+                    >
+                    <label for="remember_me" class="ml-2 text-sm text-gray-900">Remember me</label>
+                </div>
+                
+                <!-- Sign In Button -->
+                <input 
+                    type="submit" 
+                    value="Sign In" 
+                    class="mt-6 w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                >
+                
+                <!-- Sign Up Link -->
+                <p class="mt-4 text-sm text-gray-600 text-center">
+                    Don't have an account? <a href="{% url 'signup_view' %}" class="text-pink-500 hover:underline">Sign Up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
