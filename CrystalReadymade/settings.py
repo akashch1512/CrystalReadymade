@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'CrystalReadymade.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/tmp/db.sqlite3',  # Use a writable directory like /tmp
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'crystalreadymade',  # The name of the database you just created
+        'USER': 'postgres',
+        'PASSWORD': 'akash1234',  # Replace with your PostgreSQL password
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
