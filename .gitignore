@@ -1,0 +1,10 @@
+*.pyc
+__pycache__
+db.sqlite3
+/static/
+*.env
+*.log
+*.pot
+*.pyc
+*.pyo
+CrystalReadymadeEnv/
