@@ -81,14 +81,13 @@ WSGI_APPLICATION = 'CrystalReadymade.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crystalreadymade',  # The name of the database you just created
-        'USER': 'postgres',
-        'PASSWORD': 'akash1234',  # Replace with your PostgreSQL password
-        'HOST': 'localhost',
+        'NAME': 'postgres',  # The name of the database you just created
+        'USER': 'akash',
+        'PASSWORD': 'k7A3nCARwtH:rMY',  # Replace with your PostgreSQL password
+        'HOST': 'mydb-instance.c5yo8a6yezn6.eu-north-1.rds.amazonaws.com', #corre
         'PORT': '5432',
     }
 }
-
 
 
 # Password validation
