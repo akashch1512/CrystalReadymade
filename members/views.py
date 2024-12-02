@@ -3,20 +3,34 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib import messages
 
+def user_info(request):
+    if request.user.is_authenticated:
+        return render(request, 'members/userinfo.html', {
+    'email': request.user.email,
+    'username': request.user.username,
+    'firstname': request.user.first_name,
+    'lastname': request.user.last_name,
+    'last_login': request.user.last_login,
+})
+
+    else:
+        return redirect('login')  # Redirects unauthenticated users to the login page
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return user_info(request)
     if request.method == 'POST':
         # Fetch username and password from the form
         username = request.POST.get('username')
         password = request.POST.get('password')
-
+        
         # Authenticate the user
         user = authenticate(request, username=username, password=password)
         if user is not None:
             # Log the user in and redirect to homepage
             login(request, user)
             messages.success(request, f'Welcome back, {username}!')
-            return redirect('home')  # Replace 'home' with your homepage URL name
+            return redirect('ShopHome')  # Replace 'home' with your homepage URL name
         else:
             # Show error message on invalid credentials
             messages.error(request, 'Invalid username or password. Please try again.')

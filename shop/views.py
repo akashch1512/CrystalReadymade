@@ -1,9 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import EightElementSection, Product
+# from django.http import HttpResponse
+# from .models import EightElementSection, Product
+
 # Create your views here.
 def index(request):
-    return render(request, 'shop/index.html')
+    
+    show_popup = not(request.user.is_authenticated)
+    return render(request, 'shop/index.html', {'show_popup': show_popup})
 
 def aboutus(request):
     return render(request,'shop/aboutus.html')
