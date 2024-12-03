@@ -13,9 +13,8 @@ def user_info(request):
 
         if request.method == 'POST':
             # Handling profile photo upload
-            if 'profile_photo' in request.FILES:
-                profile_photo = request.FILES['profile_photo']
-                profile.user_profile_photo = profile_photo
+            if 'profile_photo' in request.FILES and profile:
+                profile.user_profile_photo = request.FILES['profile_photo']
                 profile.save()
 
             # Handling other fields and updating them
