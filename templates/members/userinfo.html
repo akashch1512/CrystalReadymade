@@ -169,7 +169,7 @@
         </div>
 </header>    
 <div class="profile-container">
-    <img src="https://via.placeholder.com/150" alt="User Profile" class="profile-img">
+    <img src="{{ user_profile_photo }}" alt="User Profile" class="profile-img">
     <p class="photo-label">Profile Photo</p>
     <hr>
   </div>
@@ -197,7 +197,7 @@
     </div>
     <div class="col-md-4">
         <label for="validationServer01" class="form-label">Phone number</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" required>
+        <input type="text" class="form-control is-valid" id="validationServer01" value="{{mobile}}" required>
         <div class="valid-feedback">
             Looks good!
         </div>
@@ -221,35 +221,35 @@
     </div>
     <div class="col-md-4">
         <label for="validationServer01" class="form-label">Adress Line 1</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" required>
+        <input type="text" class="form-control is-valid" id="validationServer01" value="{{address_line_one}}" required>
         <div class="valid-feedback">
             Looks good!
         </div>
     </div>
     <div class="col-md-4">
         <label for="validationServer01" class="form-label">Adress Line 2</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" required>
+        <input type="text" class="form-control is-valid" id="validationServer01" value="{{address_line_two}}" required>
         <div class="valid-feedback">
             Looks good!
         </div>
     </div>
     <div class="col-md-4">
         <label for="validationServer01" class="form-label">Adress Line 3</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" required>
+        <input type="text" class="form-control is-valid" id="validationServer01" value="{{address_line_three}}" required>
         <div class="valid-feedback">
             Looks good!
         </div>
     </div>
     <div class="col-md-6">
         <label for="validationServer03" class="form-label">City</label>
-        <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+        <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" value="{{city}}" required>
         <div id="validationServer03Feedback" class="invalid-feedback">
             Please provide a valid city.
         </div>
     </div>
     <div class="col-md-3">
         <label for="validationServer04" class="form-label">State</label>
-        <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+        <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" value="{{state}}"required>
             <option selected disabled >Choose...</option>
             <option>...</option>
         </select>
@@ -259,7 +259,7 @@
     </div>
     <div class="col-md-3">
         <label for="validationServer05" class="form-label">Zip</label>
-        <input type="text" class="form-control is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" required>
+        <input type="text" class="form-control is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" value="{{zip}}" required>
         <div id="validationServer05Feedback" class="invalid-feedback">
             Please provide a valid zip.
         </div>

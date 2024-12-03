@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
@@ -38,3 +38,17 @@ class EightElementSection(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)  # Ensures user deletion cascades
+    user_profile_photo = models.ImageField(upload_to='profile_photos/')  # Add upload_to for image storage
+    mobile = models.CharField(max_length=16)
+    address_line_one = models.CharField(max_length=255)  # Added max_length
+    address_line_two = models.CharField(max_length=255, blank=True, null=True)  # Optional field
+    address_line_three = models.CharField(max_length=255, blank=True, null=True)  # Optional field
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    zip = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.user.username  # Returns the associated user's username

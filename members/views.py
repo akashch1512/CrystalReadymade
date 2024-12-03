@@ -5,13 +5,40 @@ from django.contrib import messages
 
 def user_info(request):
     if request.user.is_authenticated:
-        return render(request, 'members/userinfo.html', {
-    'email': request.user.email,
-    'username': request.user.username,
-    'firstname': request.user.first_name,
-    'lastname': request.user.last_name,
-    'last_login': request.user.last_login,
-})
+        profile = getattr(request.user, 'profile', None)
+        if profile:
+            context = {
+                'email': request.user.email,
+                'username': request.user.username,
+                'firstname': request.user.first_name,
+                'lastname': request.user.last_name,
+                'last_login': request.user.last_login,
+                'user_profile_photo': profile.user_profile_photo.url if profile.user_profile_photo else None,
+                'mobile': profile.mobile,
+                'address_line_one': profile.address_line_one,
+                'address_line_two': profile.address_line_two,
+                'address_line_three': profile.address_line_three,
+                'city': profile.city,
+                'state': profile.state,
+                'zip': profile.zip,
+            }
+        else:
+            context = {
+                'email': request.user.email,
+                'username': request.user.username,
+                'firstname': request.user.first_name,
+                'lastname': request.user.last_name,
+                'last_login': request.user.last_login,
+                'user_profile_photo': None,  # Or a default placeholder URL
+                'mobile': None,
+                'address_line_one': None,
+                'address_line_two': None,
+                'address_line_three': None,
+                'city': None,
+                'state': None,
+                'zip': None,
+            }
+        return render(request, 'members/userinfo.html', {context})
 
     else:
         return redirect('login')  # Redirects unauthenticated users to the login page
