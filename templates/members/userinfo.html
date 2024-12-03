@@ -33,32 +33,82 @@
     rel="stylesheet">
 
     <style>
-        /* Custom styles to center the image */
-        .profile-container {
-      height: 35vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .profile-img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 5px solid #fff; /* Optional border */
-    }
-    .photo-label {
-      font-size: 1.2rem;
-      margin-top: 10px;
-    }
-    hr {
-      width: 50%;
-      border: 1px solid #000;
-      margin-top: 10px;
-    }
-        </style>
+      /* Center the container and align elements */
+      .profile-container {
+          height: 35vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+      }
+      
+      /* Style the profile image with a permanent dark ring */
+      .profile-img {
+          width: 150px;
+          height: 150px;
+          object-fit: cover;
+          border-radius: 50%;
+          border: 5px solid #fff; /* Optional white border */
+          box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.8); /* Permanent dark ring */
+      }
+      
+      /* Position the edit overlay */
+      .profile-img-wrapper {
+          position: relative;
+          display: inline-block;
+          width: 150px;
+          height: 150px;
+      }
+      
+      .edit-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+      }
+      
+      .profile-img-wrapper:hover .edit-overlay {
+          opacity: 1;
+      }
+      
+      /* Style the edit label */
+      .edit-label {
+          color: #fff;
+          font-size: 1rem;
+          background: #007bff;
+          padding: 5px 10px;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+      
+      /* Hide the file input element */
+      .upload-input {
+          display: none;
+      }
+      
+      /* Style the label and hr */
+      .photo-label {
+          font-size: 1.2rem;
+          margin-top: 10px;
+      }
+      
+      hr {
+          width: 50%;
+          border: 1px solid #000;
+          margin-top: 10px;
+      }
+      </style>
+      
+      
 
 </head>
 <body>
@@ -168,123 +218,110 @@
     
         </div>
 </header>    
-<div class="profile-container">
-    <img src="{{ user_profile_photo }}" alt="User Profile" class="profile-img">
+
+
+<form class="row g-3 p-5" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="profile-container">
+    <div class="profile-img-wrapper">
+        <img src="{{ user_profile_photo }}" alt="User Profile" class="profile-img">
+        <div class="edit-overlay">
+            <label for="imageUpload" class="edit-label">Edit Image</label>
+            <input type="file" id="imageUpload" name="profile_photo" accept="image/*" class="upload-input">
+        </div>
+    </div>
     <p class="photo-label">Profile Photo</p>
     <hr>
   </div>
-  <form class="row g-3 p-5">
-    <div class="col-md-4">
-        <label for="validationServer01" class="form-label">First name</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" value="{{firstname}}" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
+
+  <!-- First name field -->
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">First name</label>
+    <input type="text" name="firstname" class="form-control {% if firstname_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ firstname }}" >
+  </div>
+
+  <!-- Last name field -->
+  <div class="col-md-4">
+    <label for="validationServer02" class="form-label">Last name</label>
+    <input type="text" name="lastname" class="form-control {% if lastname_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer02" value="{{ lastname }}" >
+  </div>
+
+  <!-- Email field -->
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">Email</label>
+    <input type="text" name="email" class="form-control {% if email_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ email }}" >
+  </div>
+
+  <!-- Phone number field -->
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">Phone number</label>
+    <input type="text" name="mobile" class="form-control {% if mobile_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ mobile }}" >
+  </div>
+
+  <!-- Last Login field -->
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">Last Login</label>
+    <input type="text" class="form-control {% if last_login_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ last_login }}" >
+  </div>
+
+  <!-- Username field -->
+  <div class="col-md-4">
+    <label for="validationServerUsername" class="form-label">Username</label>
+    <div class="input-group has-validation">
+      <span class="input-group-text" id="inputGroupPrepend3">@</span>
+      <input type="text" name="username" class="form-control {% if username_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServerUsername" value="{{ username }}" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" >
     </div>
-    <div class="col-md-4">
-        <label for="validationServer02" class="form-label">Last name</label>
-        <input type="text" class="form-control is-valid" id="validationServer02" value="{{lastname}}" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
+  </div>
+
+  <!-- Address Line 1 -->
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">Address Line 1</label>
+    <input type="text" name="address_line_one" class="form-control {% if address_line_one_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ address_line_one }}" >
+  </div>
+
+  <!-- Address Line 2 -->
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">Address Line 2</label>
+    <input type="text" name="address_line_two" class="form-control {% if address_line_two_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ address_line_two }}" >
+  </div>
+
+  <!-- Address Line 3 -->
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">Address Line 3</label>
+    <input type="text" name="address_line_three" class="form-control {% if address_line_three_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ address_line_three }}" >
+  </div>
+
+  <!-- City field -->
+  <div class="col-md-6">
+    <label for="validationServer03" class="form-label">City</label>
+    <input type="text" name="city" class="form-control {% if city_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer03" aria-describedby="validationServer03Feedback" value="{{ city }}" >
+  </div>
+
+  <!-- State field -->
+  <div class="col-md-3">
+    <label for="validationServer03" class="form-label">State</label>
+    <input type="text" name="state" class="form-control {% if state_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer03" aria-describedby="validationServer03Feedback" value="{{ state }}" >
+  </div>
+
+  <!-- Zip code field -->
+  <div class="col-md-3">
+    <label for="validationServer05" class="form-label">Zip</label>
+    <input type="text" name="zip" class="form-control {% if zip_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer05" aria-describedby="validationServer05Feedback" value="{{ zip }}" >
+  </div>
+
+  <div class="col-12 text-center">
+    <div class="d-inline-block me-2">
+      <button class="btn btn-primary" type="submit">Submit Edit</button>
     </div>
-    <div class="col-md-4">
-        <label for="validationServer01" class="form-label">Email</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" value="{{email}}" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
+    <div class="d-inline-block">
+      <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button class="btn btn-primary bg-red-800" type="submit">Log Out</button>
+      </form>
+
     </div>
-    <div class="col-md-4">
-        <label for="validationServer01" class="form-label">Phone number</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" value="{{mobile}}" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-    </div><div class="col-md-4">
-        <label for="validationServer01" class="form-label">Last Login</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" value="{{last_login}}" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-    </div>
-    
-    <div class="col-md-4">
-        <label for="validationServerUsername" class="form-label">Username</label>
-        <div class="input-group has-validation">
-            <span class="input-group-text" id="inputGroupPrepend3">@</span>
-            <input type="text" class="form-control is-invalid" id="validationServerUsername" value="{{username}}" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
-            <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                Please choose a username.
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <label for="validationServer01" class="form-label">Adress Line 1</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" value="{{address_line_one}}" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-    </div>
-    <div class="col-md-4">
-        <label for="validationServer01" class="form-label">Adress Line 2</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" value="{{address_line_two}}" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-    </div>
-    <div class="col-md-4">
-        <label for="validationServer01" class="form-label">Adress Line 3</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" value="{{address_line_three}}" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-    </div>
-    <div class="col-md-6">
-        <label for="validationServer03" class="form-label">City</label>
-        <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" value="{{city}}" required>
-        <div id="validationServer03Feedback" class="invalid-feedback">
-            Please provide a valid city.
-        </div>
-    </div>
-    <div class="col-md-3">
-        <label for="validationServer04" class="form-label">State</label>
-        <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" value="{{state}}"required>
-            <option selected disabled >Choose...</option>
-            <option>...</option>
-        </select>
-        <div id="validationServer04Feedback" class="invalid-feedback">
-            Please select a valid state.
-        </div>
-    </div>
-    <div class="col-md-3">
-        <label for="validationServer05" class="form-label">Zip</label>
-        <input type="text" class="form-control is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" value="{{zip}}" required>
-        <div id="validationServer05Feedback" class="invalid-feedback">
-            Please provide a valid zip.
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="form-check">
-            <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
-            <label class="form-check-label" for="invalidCheck3">
-                Agree to terms and conditions
-            </label>
-            <div id="invalidCheck3Feedback" class="invalid-feedback">
-                You must agree before submitting.
-            </div>
-        </div>
-    </div>
-    <div class="col-12">
-        <button class="btn btn-primary" type="submit">Submit form</button>
-    </div>
-</form>
-<div class="col-12">
-  <form method="POST" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button class="btn btn-primary" type="submit">Log Out</button>
+  </div>
   </form>
-</div>
 
   <!--
     - custom js link
