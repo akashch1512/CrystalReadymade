@@ -38,17 +38,18 @@ class EightElementSection(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # Ensures user deletion cascades
-    user_profile_photo = models.ImageField(upload_to='profile_photos/')  # Add upload_to for image storage
-    mobile = models.CharField(max_length=16)
-    address_line_one = models.CharField(max_length=255)  # Added max_length
-    address_line_two = models.CharField(max_length=255, blank=True, null=True)  # Optional field
-    address_line_three = models.CharField(max_length=255, blank=True, null=True)  # Optional field
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    zip = models.CharField(max_length=10)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_profile_photo = models.BinaryField(blank=True, null=True)  # Store the image as binary data
+    mobile = models.CharField(max_length=16, blank=True, null=True)
+    address_line_one = models.CharField(max_length=255, blank=True, null=True)
+    address_line_two = models.CharField(max_length=255, blank=True, null=True)
+    address_line_three = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    state = models.CharField(max_length=100, blank=True, null=True)
+    zip = models.CharField(max_length=10, blank=True, null=True)
 
     def __str__(self):
-        return self.user.username  # Returns the associated user's username
+        return self.user.username

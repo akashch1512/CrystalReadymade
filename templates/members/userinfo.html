@@ -184,7 +184,7 @@
               <img src="{% static '/shop/images/logo/logo.gif' %}" alt="Anon's logo" width="200" height="20">
             </a>
     
-            <div class="header-search-container">
+            <!-- <div class="header-search-container">
     
               <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
     
@@ -193,7 +193,10 @@
               </button>
     
             </div>
-    
+          -->
+
+          <p class="text-bold text-3xl text-center -ml-7"><strong>Profile View</strong></p>
+
             <div class="header-user-actions">
     
               <a href="/members/login/">
@@ -217,51 +220,54 @@
           </div>
     
         </div>
+
 </header>    
 
-
+<!-- form -->
 <form class="row g-3 p-5" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="profile-container">
     <div class="profile-img-wrapper">
-        <img src="{{ user_profile_photo }}" alt="User Profile" class="profile-img">
+        <img src="https://i.pinimg.com/736x/1e/94/7d/1e947dfcaad552afa209bceebbfac47b.jpg" alt="User Profile" class="profile-img">
         <div class="edit-overlay">
             <label for="imageUpload" class="edit-label">Edit Image</label>
             <input type="file" id="imageUpload" name="profile_photo" accept="image/*" class="upload-input">
         </div>
     </div>
-    <p class="photo-label">Profile Photo</p>
+    
+    <p class="text-bold photo-label mt-4 text-2xl">Profile Photo</p>
+    <br></br>
     <hr>
-  </div>
-
+    <br></br>
+</div>
   <!-- First name field -->
   <div class="col-md-4">
     <label for="validationServer01" class="form-label">First name</label>
-    <input type="text" name="firstname" class="form-control {% if firstname_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ firstname }}" >
-  </div>
+  <input type="text" name="firstname" class="form-control is-valid" id="validationServer01" value="{{ firstname }}" >
+</div>
 
   <!-- Last name field -->
   <div class="col-md-4">
     <label for="validationServer02" class="form-label">Last name</label>
-    <input type="text" name="lastname" class="form-control {% if lastname_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer02" value="{{ lastname }}" >
-  </div>
+  <input type="text" name="lastname" class="form-control is-valid" id="validationServer02" value="{{ lastname }}" >
+</div>
 
-  <!-- Email field -->
-  <div class="col-md-4">
+<div class="col-md-4">
+    <!-- Email field -->
     <label for="validationServer01" class="form-label">Email</label>
-    <input type="text" name="email" class="form-control {% if email_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ email }}" >
+    <input type="text" name="email" class="form-control is-valid" id="validationServer01" value="{{ email }}" >
   </div>
 
   <!-- Phone number field -->
   <div class="col-md-4">
     <label for="validationServer01" class="form-label">Phone number</label>
-    <input type="text" name="mobile" class="form-control {% if mobile_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ mobile }}" >
+    <input type="text" name="mobile" class="form-control {% if mobile != 'None' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ mobile }}" >
   </div>
 
   <!-- Last Login field -->
   <div class="col-md-4">
     <label for="validationServer01" class="form-label">Last Login</label>
-    <input type="text" class="form-control {% if last_login_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ last_login }}" >
+    <input type="text" class="form-control is-valid" id="validationServer01" value="{{ last_login }}" >
   </div>
 
   <!-- Username field -->
@@ -269,61 +275,69 @@
     <label for="validationServerUsername" class="form-label">Username</label>
     <div class="input-group has-validation">
       <span class="input-group-text" id="inputGroupPrepend3">@</span>
-      <input type="text" name="username" class="form-control {% if username_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServerUsername" value="{{ username }}" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" >
+      <input type="text" name="username" value="{{ username }}" class="form-control {% if username != 'None' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" >
     </div>
   </div>
 
   <!-- Address Line 1 -->
   <div class="col-md-4">
     <label for="validationServer01" class="form-label">Address Line 1</label>
-    <input type="text" name="address_line_one" class="form-control {% if address_line_one_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ address_line_one }}" >
+    <input type="text" name="address_line_one" class="form-control {% if address_line_one != 'None' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ address_line_one }}" >
   </div>
 
   <!-- Address Line 2 -->
   <div class="col-md-4">
     <label for="validationServer01" class="form-label">Address Line 2</label>
-    <input type="text" name="address_line_two" class="form-control {% if address_line_two_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ address_line_two }}" >
+    <input type="text" name="address_line_two" class="form-control {% if address_line_two != 'None' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ address_line_two }}" >
   </div>
 
   <!-- Address Line 3 -->
   <div class="col-md-4">
     <label for="validationServer01" class="form-label">Address Line 3</label>
-    <input type="text" name="address_line_three" class="form-control {% if address_line_three_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ address_line_three }}" >
+    <input type="text" name="address_line_three" class="form-control {% if address_line_three != 'None' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer01" value="{{ address_line_three }}" >
   </div>
 
   <!-- City field -->
   <div class="col-md-6">
     <label for="validationServer03" class="form-label">City</label>
-    <input type="text" name="city" class="form-control {% if city_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer03" aria-describedby="validationServer03Feedback" value="{{ city }}" >
+    <input type="text" name="city" class="form-control {% if city != 'None' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer03" aria-describedby="validationServer03Feedback" value="{{ city }}" >
   </div>
 
   <!-- State field -->
   <div class="col-md-3">
     <label for="validationServer03" class="form-label">State</label>
-    <input type="text" name="state" class="form-control {% if state_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer03" aria-describedby="validationServer03Feedback" value="{{ state }}" >
+    <input type="text" name="state" class="form-control {% if state != 'None' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer03" aria-describedby="validationServer03Feedback" value="{{ state }}" >
   </div>
 
   <!-- Zip code field -->
   <div class="col-md-3">
     <label for="validationServer05" class="form-label">Zip</label>
-    <input type="text" name="zip" class="form-control {% if zip_valid == 'is-valid' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer05" aria-describedby="validationServer05Feedback" value="{{ zip }}" >
+    <input type="text" name="zip" class="form-control {% if zip != 'None' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer05" aria-describedby="validationServer05Feedback" value="{{ zip }}" >
   </div>
 
   <div class="col-12 text-center">
     <div class="d-inline-block me-2">
       <button class="btn btn-primary" type="submit">Submit Edit</button>
     </div>
-    <div class="d-inline-block">
-      <form method="POST" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button class="btn btn-primary bg-red-800" type="submit">Log Out</button>
-      </form>
 
-    </div>
+  </div>
+
+</div>
   </div>
   </form>
 
-  <!--
+
+  <!-- log out button -->
+  <div class="col-12 text-center">
+    <div class="d-inline-block me-2">
+    <form method="POST" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button class="btn btn-primary onhover-bg-red-300 bg-red-700" type="submit">Log Out</button>
+    </form>
+  </div>
+  </div>
+  
+    <!--
     - custom js link
   -->
   <script src="{% static '/shop/js/script.js' %}"></script>
