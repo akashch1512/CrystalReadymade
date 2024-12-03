@@ -38,7 +38,7 @@ def user_info(request):
                 'state': None,
                 'zip': None,
             }
-        return render(request, 'members/userinfo.html', {context})
+        return render(request, 'members/userinfo.html', context)
 
     else:
         return redirect('login')  # Redirects unauthenticated users to the login page
