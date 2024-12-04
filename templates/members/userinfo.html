@@ -195,7 +195,7 @@
             </div>
           -->
 
-          <p class="text-bold text-3xl text-center -ml-7"><strong>Profile View</strong></p>
+          <p class="text-bold text-3xl text-center sm-0 sm:-ml-7"><strong>USER PROFILE</strong></p>
 
             <div class="header-user-actions">
     
@@ -315,26 +315,20 @@
     <input type="text" name="zip" class="form-control {% if zip != 'None' %}is-valid{% else %}is-invalid{% endif %}" id="validationServer05" aria-describedby="validationServer05Feedback" value="{{ zip }}" >
   </div>
 
-  <div class="col-12 text-center">
-    <div class="d-inline-block me-2">
-      <button class="btn btn-primary" type="submit">Submit Edit</button>
+  <div class="col-12 text-center mt-20">
+    <div class="lg:flex-row row lg:w-1/4 lg:justify-center justify-content-center gx-2">
+      <!-- Submit Edit Button -->
+      <div class="col-6">
+        <button class="btn btn-primary w-100" type="submit">Submit Edit</button>
+      </div>
+      <!-- Log Out Button -->
+      <div class="col-6">
+        <form method="POST" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button class="btn btn-danger w-100" type="submit">Log Out</button>
+        </form>
+      </div>
     </div>
-
-  </div>
-
-</div>
-  </div>
-  </form>
-
-
-  <!-- log out button -->
-  <div class="col-12 text-center">
-    <div class="d-inline-block me-2">
-    <form method="POST" action="{% url 'logout' %}">
-      {% csrf_token %}
-      <button class="btn btn-primary onhover-bg-red-300 bg-red-700" type="submit">Log Out</button>
-    </form>
-  </div>
   </div>
   
     <!--
