@@ -216,15 +216,22 @@
           </form>
         </div>
         
-        <div class="header-search-container">
-
-          <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
-
-          <button class="search-btn">
-            <ion-icon name="search-outline"></ion-icon>
-          </button>
-
-        </div>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="header-search-container">
+            <input 
+              type="search_qu" 
+              name="search_query" 
+              class="search-field" 
+              placeholder="Enter your product name..." 
+              required 
+            />
+            <button type="submit" class="search-btn">
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
+          </div>
+        </form>
+        
 
         <div class="header-user-actions">
 
