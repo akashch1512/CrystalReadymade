@@ -36,6 +36,9 @@
 </head>
 
   <body>
+
+    
+
     
     <div class="header-top">
 
@@ -638,88 +641,34 @@
 
         
 
-<!-- add cards here to display products  -->
-<div class="product-card bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-  <a href="#">
-    <img class="rounded-t-lg w-full h-48 object-cover" src="https://img.freepik.com/premium-psd/clothing-tag-product-mockup_1057066-415.jpg" alt="Product Image">
-  </a>
-  <div class="p-5 flex flex-col">
-    <div class="flex items-center justify-between">
-      <a href="#">
-        <h5 class="text-gray-900 font-bold text-lg dark:text-black truncate max-w-full">Product Name</h5>
-      </a>
-      <div class="star-rating flex items-center">
-        <svg class="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 15l-5.671 -4.405a1.794 1.794 0 00-2.513 0L4.329 15a1.803 1.803 0 001.257 2.842h9.178a1.786 1.786 0 001.257-2.842zM10 5l.671 4.405a1.794 1.794 0 01-2.513 0L7.671 5a1.803 1.803 0 011.257-2.842h9.178a1.786 1.786 0 011.257 2.842z"></path>
-        </svg>
-        <span class="text-gray-900 dark:text-black">4.5</span>
+
+   
+<!-- Product Grid Section -->
+<div class="container mx-auto px-0 md:px-2 lg:px-4 pt-0 pb-0 max-w-screen-xl mt-0">
+  <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-2">
+    {% for product in products %}
+    <!-- Product 1 -->
+    <div class="bg-red-100 border rounded-lg p-4 shadow-lg transition transform hover:scale-105">
+      <picture>
+        <source srcset="{% static 'shop/images/temp/pic-desktop.jpg' %}" media="(min-width:700px)">
+        <img src="{% static 'shop/images/temp/pic-mobil4c.jpg' %}" alt="" class="w-full h-48 object-cover rounded-lg">
+      </picture>
+      <div class="pt-2">
+        <p class="text-red-700 text-sm">Perfume</p>
+        <h1 class="text-lg font-semibold">Gabrielle Essence Eau De Parfum</h1>
+        <p class="text-gray-600 mt-2 text-sm">A floral, solar and voluptuous interpretation...</p>
+        <div class="mt-4 flex items-center gap-2">
+          <p class="text-red-700 font-bold text-lg">£149.00</p>
+          <p class="line-through text-gray-500">£189.00</p>
+        </div>
+        <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md w-full hover:bg-red-600 transition">Add To Cart</button>
       </div>
     </div>
-    <p class="text-black mt-2 dark:text-gray-400 text-sm line-clamp-3">This is a long product description that should get truncated if it's too long. The description continues beyond the available space, but we want it to truncate with ellipsis...</p>
-    <div class="flex items-center justify-between mt-auto">
-      <p class="text-gray-900 dark:text-black text-sm">Starting at $29.99</p>
-      <a href="#">
-        <button class="bg-black text-white hover:bg-gray-800 px-3 py-2 rounded-md focus:outline-none text-xs">Add to Cart</button>
-      </a>
-    </div>
-  </div>
-</div>
-<div class="product-card bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-  <a href="#">
-    <img class="rounded-t-lg w-full h-48 object-cover" src="https://img.freepik.com/premium-psd/clothing-tag-product-mockup_1057066-415.jpg" alt="Product Image">
-  </a>
-  <div class="p-5 flex flex-col">
-    <div class="flex items-center justify-between">
-      <a href="#">
-        <h5 class="text-gray-900 font-bold text-lg dark:text-black truncate max-w-full">Product Name</h5>
-      </a>
-      <div class="star-rating flex items-center">
-        <svg class="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 15l-5.671 -4.405a1.794 1.794 0 00-2.513 0L4.329 15a1.803 1.803 0 001.257 2.842h9.178a1.786 1.786 0 001.257-2.842zM10 5l.671 4.405a1.794 1.794 0 01-2.513 0L7.671 5a1.803 1.803 0 011.257-2.842h9.178a1.786 1.786 0 011.257 2.842z"></path>
-        </svg>
-        <span class="text-gray-900 dark:text-black">4.5</span>
-      </div>
-    </div>
-    <p class="text-black mt-2 dark:text-gray-400 text-sm line-clamp-3">This is a long product description that should get truncated if it's too long. The description continues beyond the available space, but we want it to truncate with ellipsis...</p>
-    <div class="flex items-center justify-between mt-auto">
-      <p class="text-gray-900 dark:text-black text-sm">Starting at $29.99</p>
-      <a href="#">
-        <button class="bg-black text-white hover:bg-gray-800 px-3 py-2 rounded-md focus:outline-none text-xs">Add to Cart</button>
-      </a>
-    </div>
-  </div>
-</div>
-<div class="product-card bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-  <a href="#">
-    <img class="rounded-t-lg w-full h-48 object-cover" src="https://img.freepik.com/premium-psd/clothing-tag-product-mockup_1057066-415.jpg" alt="Product Image">
-  </a>
-  <div class="p-5 flex flex-col">
-    <div class="flex items-center justify-between">
-      <a href="#">
-        <h5 class="text-gray-900 font-bold text-lg dark:text-black truncate max-w-full">Product Name</h5>
-      </a>
-      <div class="star-rating flex items-center">
-        <svg class="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 15l-5.671 -4.405a1.794 1.794 0 00-2.513 0L4.329 15a1.803 1.803 0 001.257 2.842h9.178a1.786 1.786 0 001.257-2.842zM10 5l.671 4.405a1.794 1.794 0 01-2.513 0L7.671 5a1.803 1.803 0 011.257-2.842h9.178a1.786 1.786 0 011.257 2.842z"></path>
-        </svg>
-        <span class="text-gray-900 dark:text-black">4.5</span>
-      </div>
-    </div>
-    <p class="text-black mt-2 dark:text-gray-400 text-sm line-clamp-3">This is a long product description that should get truncated if it's too long. The description continues beyond the available space, but we want it to truncate with ellipsis...</p>
-    <div class="flex items-center justify-between mt-auto">
-      <p class="text-gray-900 dark:text-black text-sm">Starting at $29.99</p>
-      <a href="#">
-        <button class="bg-black text-white hover:bg-gray-800 px-3 py-2 rounded-md focus:outline-none text-xs">Add to Cart</button>
-      </a>
-    </div>
+    {% endfor %}
   </div>
 </div>
 
-<style>
-  .star-rating {
-  color: orange; /* Adjust star color as needed */
-}
-</style>
+
 
         <script src="{% static 'shop/js/script.js' %}"></script>
 
