@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font: inherit;
+}
+
+img{
+    max-width: 100%;
+}
+
+.container{
+ width: min(100%, 940px);
+ margin-inline: auto;
+ padding: 3rem;
+ display: grid;
+ justify-items: center;
+ gap: 2rem;
+ background: linear-gradient(145deg, #e6e6e6, #ffffff);
+ box-shadow: 5px 5px 3px #d9d9d9, -5px -5px 3px #ffffff;
+ border-radius: 40px;
+ margin-block: 3rem;
+}
+
+.container>div{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+}
+.container>div>:nth-child(1){
+    display: grid;
+    justify-items: center;
+    gap: 2rem;
+}
+.container>div>:nth-child(1)>div>button{
+    background-color: transparent;
+    width: 70px;
+    height: 70px;
+    border: none;
+    cursor: pointer;
+    padding-left: 1rem;
+}
+
+.container>div>:nth-child(2){
+    display: grid;
+    align-items: center;
+    gap: 1rem;
+    padding-left: 2rem;
+}
+
+
+.container h2{
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1;
+    color: #000000;
+}
+.container h4{
+    font-size: 26px;
+    font-weight: 200;
+    line-height: 1;
+    color: #000000;
+}
+.container span{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.container span>img{
+    width: 20px;
+    height: 20px;
+}
+.container small{
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 400;
+    margin-right: 1rem;
+    color: #000000;
+}
+
+.container b{
+    font-size: clamp(1.5rem, 4vw + 1rem, 2.375rem);
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.25;
+}
+
+.container p{
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 1.25;
+    color: #000000;
+}
+
+.container>div>:nth-child(2)>button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 1.75rem;
+    font-size: 18px;
+    line-height: 1.25;
+    font-weight: 400;
+    color: #ffffff;
+    background-color: #000000;
+    gap: 1rem;
+    border: 1px solid #000000;
+}
+
+.container .buy-now-btn{
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+
+@media (max-width: 50rem) {
+    .container>div{
+        grid-template-columns: 1fr;
+    }
+    .container>div>:nth-child(1){
+        grid-template-columns: 1fr 100px;
+        align-items: center;
+    }
+    
+}
+
+@media (max-width: 30rem) {
+   .container{
+    padding: 1rem;
+    border-radius: 0;
+    box-shadow: none;
+   }
+   .container>div>:nth-child(1){
+    grid-template-columns: 1fr;
+   }
+    
+   
+.container>div>:nth-child(1)>div>button{
+    width: 60px;
+    height: 60px;
+}
+/* Removing the padding-left from the second child of the div. */
+.container>div>:nth-child(2){
+    padding-left: 0;
+}
+}
