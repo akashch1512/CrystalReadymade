@@ -208,13 +208,6 @@
         <a href="/" class="header-logo">
           <img src="{% static '/shop/images/logo/logo.gif' %}" alt="Anon's logo" width="200" height="20">
         </a>
-
-        <div class="col-12">
-          <form method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button class="btn btn-primary" type="submit">Log Out</button>
-          </form>
-        </div>
         
         <form method="POST">
           {% csrf_token %}
