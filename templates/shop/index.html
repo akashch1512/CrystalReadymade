@@ -55,7 +55,7 @@
       </button>
       
       <div class="newsletter-img">
-        <img src="{% static '/shop/images/newsletter.png' %}" alt="subscribe newsletter" width="550" height="550">
+        <img src="{% static '/shop/images/newsletter.png' %}" alt="subscribe newsletter" width="550" height="555">
       </div>
       
       <div class="newsletter" rel="stylesheet">
@@ -75,23 +75,24 @@
             <input type="text" name="username" class="email-field mb-4 px-4 py-2 border border-gray-300 rounded-md w-full" placeholder="Username" required>
           
             <input type="password" name="password" class="email-field mb-4 px-4 py-2 border border-gray-300 rounded-md w-full" placeholder="Password" required>
-          
+            <div class="mt-5 sm:mt-4"> 
             <div class="flex justify-between mb-4 gap-4">
-              <button type="submit" class="btn-newsletter bg-blue-600 hover:bg-blue-700 text-white rounded-md font-semibold px-6 py-2">
+              <button type="submit" class="btn-newsletter bg-red-400 hover:bg-pink-700 text-white rounded-md font-semibold px-6 py-2">
                 Log In
               </button>
               <a href="/members/login/">
-              <button type="button" class="btn-newsletter bg-green-500 hover:bg-green-600 text-white rounded-md font-semibold px-6 py-2">
+              <button type="button" class="btn-newsletter bg-red-400 hover:bg-pink-600 text-white rounded-md font-semibold px-6 py-2">
                 Sign Up
               </button>
             </a>
             </div>
+
           
             <a href="#" class="text-blue-500 hover:text-blue-700 text-sm text-center mt-2">
               Forgot Password?
             </a>
           </form>
-          
+      </div>
           
           
 
