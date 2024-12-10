@@ -57,3 +57,9 @@ def checkout(request):
 
 def trackingstatus(request):
     return render(request,'shop/trackingstatus.html')
+
+def likedproducts(request):
+    return render(request, 'shop/likedproducts.html')
+
+def cart(request):
+    return render(request, 'shop/cart.html')

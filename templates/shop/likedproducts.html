@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
 
   <title>Crystal Readymade - eCommerce</title>
 
@@ -35,14 +35,12 @@
 </head>
 
   <body>
-
     <main>
-    
-    <div class="header-top">
+        <div class="header-top">
 
-        <div class="container">
+            <div class="container">
   
-          <ul class="header-social-container">
+                <ul class="header-social-container">
   
             <li>
               <a href="#" class="social-link">
@@ -103,7 +101,7 @@
       <div class="header-main">
   
         <div class="container">
-
+  
           <a href="{% url 'ShopHome' %}">
             <img src="{% static '/shop/images/logo/logo.gif' %}" alt="Anon's logo" width="200" height="20">
           </a>
@@ -127,222 +125,75 @@
           </a>
   
             <a href="{% url 'LikedProducts' %}"
+            <button class="action-btn">
+              <ion-icon name="heart-outline"></ion-icon>
+              <span class="count">0</span>
+            </button>
+          </a>
+  
+          <a href="{% url 'cart' %}"
           <button class="action-btn">
-            <ion-icon name="heart-outline"></ion-icon>
+            <ion-icon name="bag-handle-outline"></ion-icon>
             <span class="count">0</span>
           </button>
         </a>
   
-        <a href="{% url 'cart' %}"
-        <button class="action-btn">
-          <ion-icon name="bag-handle-outline"></ion-icon>
-          <span class="count">0</span>
-        </button>
-      </a>
-  
           </div>
   
         </div>
   
       </div>
-   
 
-      <div class="container my-5">
-        <!-- Product View Section -->
-        <div class="row bg-white rounded shadow-sm p-4 align-items-start">
-          
-          <!-- Product Image Gallery -->
-          <div class="col-md-6 mb-4 mb-md-0">
-            <div class="text-center">
-              <!-- Main Product Image -->
-              <img src="https://framerusercontent.com/images/QRLUpptC0T0jeTtCDdsiZzF04.webp" class="img-fluid rounded mb-3" alt="Main Product Image">
-              
-              <!-- Thumbnails Section -->
-              <div class="d-flex justify-content-center gap-2">
-                <img src="https://uploads-ssl.webflow.com/5ee0a01b09389eebf4c09b45/6418a5cc49b9d5d2e94883c9_Ai-Product-Image-Can-Pool-Background-After-Mobile.webp" class="rounded-lg w-25 h-25 object-fit-cover" alt="Thumbnail 1">
-                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/611934170183275.Y3JvcCwxMjAwLDkzOCwwLDEzMA.jpeg" class="rounded-lg w-25 h-25 object-fit-cover" alt="Thumbnail 2">
-                <img src="https://th.bing.com/th/id/OIP.o-GnPgsj1lbPhVFECi8U5QHaJX?w=680&h=860&rs=1&pid=ImgDetMain" class="rounded-lg w-25 h-25 object-fit-cover" alt="Thumbnail 3">
+
+      <div class="container mx-auto px-4 py-8">
+        <!-- Section Title -->
+        <h1 class="text-2xl font-bold text-pink-500 mb-6">Liked Products</h1>
+        
+        {% if liked_products %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {% for product in liked_products %}
+          <!-- Product Card -->
+          <div class="bg-white border border-pink-200 rounded-lg shadow-lg overflow-hidden">
+            <img src="{{ product.image_url }}" alt="{{ product.name }}" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h2 class="text-lg font-semibold text-pink-500 truncate">{{ product.name }}</h2>
+              <p class="text-gray-600 mt-2">${{ product.price }}</p>
+              <div class="mt-4 flex justify-between items-center">
+                <a href="{% url 'product_detail' product.id %}" class="text-pink-500 hover:text-pink-700 font-semibold text-sm">
+                  View Product
+                </a>
+                <form method="POST" action="{% url 'remove_liked_product' product.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="text-pink-500 hover:text-pink-700 font-semibold text-sm">
+                    Remove
+                  </button>
+                </form>
               </div>
             </div>
           </div>
-      
-          <!-- Product Details Section -->
-          <div class="col-md-6 ps-md-4">
-            <!-- Product Title -->
-            <h1 class="text-pink-500 mb-3 font-bold text-3xl">OLIPOP Healthy Soda</h1>
-            
-            <!-- Product Price -->
-            <h3 class="text-muted mb-3 font-bold text-2xl">₹79.99</h3>
-            
-            <!-- Product Description -->
-            <p class="text-secondary mb-3">
-              This stylish, durable handbag is the perfect choice for your daily errands and formal occasions. Made with attention to detail and premium materials.
-            </p>
-            
-            <!-- Buttons Section -->
-            <div class="d-flex gap-2 mb-3">
-              <button class="btn btn-pink btn-lg flex-fill">Buy Now</button>
-              <button class="btn btn-outline-danger btn-lg flex-fill">Add to Cart</button>
-            </div>
-      
-            <!-- Ratings Section -->
-            <div class="mb-3">
-              <span class="text-warning">⭐⭐⭐⭐☆</span>
-              <span class="text-muted">(120 reviews)</span>
-            </div>
-      
-            <!-- Stock Availability -->
-            <div class="d-flex align-items-center gap-2 mb-3">
-              <span class="badge bg-success text-white py-2 px-3 text-sm">In Stock</span>
-            </div>
-      
-            <!-- Size Selector Dropdown -->
-            <div class="mb-3">
-              <label for="sizeSelect" class="text-muted">Select Size:</label>
-              <select class="form-select rounded-md" id="sizeSelect">
-                <option value="s">Small</option>
-                <option value="m">Medium</option>
-                <option value="l">Large</option>
-              </select>
-            </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center text-gray-500 mt-12">
+          <p>No liked products yet. Start exploring and like your favorites!</p>
+        </div>
+        <div class="text-center mt-8">
+            <a href="{% url 'ShopHome' %}" class="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700 font-semibold transition w-auto mx-auto block">
+              Go to Home Now 🛍️
+            </a>
           </div>
-      
-        </div>
+          
+          
+        {% endif %}
       </div>
-<style>
-
-  /* Pink Theme Customizations */
-.text-pink-500 {
-  color: #e91e63 !important;
-}
-
-.btn-pink {
-  background-color: #e91e63 !important;
-  color: #fff;
-  border: none;
-}
-
-.btn-pink:hover {
-  background-color: #d81b5c !important;
-}
-
-.form-select {
-  border: 1px solid #e91e63 !important;
-}
-
-/* Add smooth hover effects */
-.btn:hover {
-  transition: all 0.3s ease;
-}
-
-</style>      
+            
 
 
-<div class="container mt-5">
-  <!-- About This Item Section -->
-  <div class="bg-light p-4 rounded shadow-sm">
-    <h2 class="text-pink-500 mb-3 text-3xl font-bold">About This Item</h2>
-    <ul class="list-unstyled text-muted">
-      <li class="mb-2">
-        <strong>Brand:</strong> OLIPOP Healthy Soda
-      </li>
-      <li class="mb-2">
-        <strong>Flavor Options:</strong> Available in delicious flavors like Classic Root Beer, Vintage Cola, Orange Squeeze, and Strawberry Vanilla.
-      </li>
-      <li class="mb-2">
-        <strong>Health Benefits:</strong> Packed with prebiotics, fiber, and botanicals to support gut health and digestion.
-      </li>
-      <li class="mb-2">
-        <strong>Low Sugar:</strong> Contains only 2-5g of sugar per can, making it a guilt-free alternative to traditional sodas.
-      </li>
-      <li class="mb-2">
-        <strong>Calorie Count:</strong> Ranges from 35-50 calories per can, perfect for those looking to maintain a healthy lifestyle.
-      </li>
-      <li class="mb-2">
-        <strong>Ingredients:</strong> Made with natural ingredients like cassava root, chicory root, and kudzu root to promote wellness.
-      </li>
-      <li class="mb-2">
-        <strong>Serving Size:</strong> Comes in 12 oz cans, ideal for on-the-go refreshment or as a meal companion.
-      </li>
-      <li class="mb-2">
-        <strong>Dietary Information:</strong> Gluten-free, vegan, non-GMO, and keto-friendly, catering to a wide range of dietary needs.
-      </li>
-      <li class="mb-2">
-        <strong>Unique Selling Point:</strong> Combines the nostalgic taste of soda with the health benefits of functional beverages.
-      </li>
-      <li>
-        <strong>Warranty:</strong> Satisfaction guaranteed, with a money-back policy for unsatisfied customers.
-      </li>
-      
-    </ul>
-  </div>
 
-  <!-- Similar Products Section -->
-<div class="mt-5">
-  <h2 class="text-pink-500 mb-3">Similar Products</h2>
-  <div class="row g-3">
-    <!-- Similar Product Card 1 -->
-    <div class="col-md-3 col-sm-6">
-      <div class="card h-100">
-        <div class="overflow-hidden" style="height: 300px;">
-          <img src="https://i5.walmartimages.com/asr/c7aded6a-0dcd-496d-b683-cd201c761718.0872f658573f494d7b456640545ca09d.jpeg" class="card-img-top img-fluid h-100 w-100 object-fit-cover" alt="Similar Product 1">
-        </div>
-        <div class="card-body">
-          <h5 class="card-title text-pink-500">Classic Tote Bag</h5>
-          <p class="card-text text-muted">₹49.99</p>
-          <a href="#" class="btn btn-pink w-100">View Product</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Similar Product Card 2 -->
-    <div class="col-md-3 col-sm-6">
-      <div class="card h-100">
-        <div class="overflow-hidden" style="height: 300px;">
-          <img src="https://th.bing.com/th/id/OIP.4o3G6-W5Y_mBUjlL5SG5AgHaHa?rs=1&pid=ImgDetMain" class="card-img-top img-fluid h-100 w-100 object-fit-cover" alt="Similar Product 2">
-        </div>
-        <div class="card-body">
-          <h5 class="card-title text-pink-500">Elegant Shoulder Bag</h5>
-          <p class="card-text text-muted">₹59.99</p>
-          <a href="#" class="btn btn-pink w-100">View Product</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Similar Product Card 3 -->
-    <div class="col-md-3 col-sm-6">
-      <div class="card h-100">
-        <div class="overflow-hidden" style="height: 300px;">
-          <img src="https://i.pinimg.com/736x/86/50/3b/86503b2f210115526b2dfc574f29fa83.jpg" class="card-img-top img-fluid h-100 w-100 object-fit-cover" alt="Similar Product 3">
-        </div>
-        <div class="card-body">
-          <h5 class="card-title text-pink-500">Designer Clutch</h5>
-          <p class="card-text text-muted">₹69.99</p>
-          <a href="#" class="btn btn-pink w-100">View Product</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Similar Product Card 4 -->
-    <div class="col-md-3 col-sm-6">
-      <div class="card h-100">
-        <div class="overflow-hidden" style="height: 300px;">
-          <img src="https://th.bing.com/th/id/OIP.lTu1pp-H78TwtpVTehZ5UgHaG1?rs=1&pid=ImgDetMain" class="card-img-top img-fluid h-100 w-100 object-fit-cover" alt="Similar Product 4">
-        </div>
-        <div class="card-body">
-          <h5 class="card-title text-pink-500">Trendy Backpack</h5>
-          <p class="card-text text-muted">₹89.99</p>
-          <a href="#" class="btn btn-pink w-100">View Product</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div>
-  <br><br>
-</main>
+    </main>    
 
 
+    
   <!--
     - FOOTER
   -->
@@ -633,9 +484,6 @@
     </div>
 
   </footer>
-
-
-
 
                 <script src="{% static 'shop/js/script.js' %}"></script>
 

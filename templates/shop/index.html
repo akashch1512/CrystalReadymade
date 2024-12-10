@@ -201,12 +201,10 @@
       </div>
 
     </div>
-
+    
     <div class="header-main">
-
       <div class="container">
-
-        <a href="/" class="header-logo">
+        <a href="{% url 'ShopHome' %}">
           <img src="{% static '/shop/images/logo/logo.gif' %}" alt="Anon's logo" width="200" height="20">
         </a>
         
@@ -229,21 +227,25 @@
 
         <div class="header-user-actions">
 
-          <a href="/members/login/">
+          <a href="{% url 'login_view' %}"
             <button class="action-btn">
               <ion-icon name="person-outline"></ion-icon>
             </button>
           </a>
-
+          
+          <a href="{% url 'LikedProducts' %}"
           <button class="action-btn">
             <ion-icon name="heart-outline"></ion-icon>
             <span class="count">0</span>
           </button>
+        </a>
 
+        <a href="{% url 'cart' %}"
           <button class="action-btn">
             <ion-icon name="bag-handle-outline"></ion-icon>
             <span class="count">0</span>
           </button>
+        </a>
 
         </div>
 
