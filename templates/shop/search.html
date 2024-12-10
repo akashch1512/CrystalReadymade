@@ -32,6 +32,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 
 </head>
 
@@ -916,6 +918,14 @@
 
 
 <div>
+
+  
+  <div class="bg-gray-100 text-gray-700 text-sm font-semibold text-lg p-3 rounded-t-lg">
+    Here's what we found for '{{ search_query }}'
+  </div>
+  
+  
+  
 <!-- Product Grid Section -->
 <div class="container mx-auto px-0 md:px-2 lg:px-4 pt-0 pb-0 max-w-screen-xl mt-0">
   <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-2">
@@ -931,17 +941,23 @@
         <h1 class="text-lg font-semibold">Gabrielle Essence Eau De Parfum</h1>
         <p class="text-gray-600 mt-2 text-sm">A floral, solar and voluptuous interpretation...</p>
         <div class="mt-4 flex items-center gap-2">
-          <p class="text-red-700 font-bold text-lg">£149.00</p>
-          <p class="line-through text-gray-500">£189.00</p>
+          <p class="text-red-700 font-bold text-lg">$149.00</p>
+          <p class="line-through text-gray-500">$189.00</p>
         </div>
         <div class="flex flex-nowrap space-x-1 mt-4">
-          <button class="bg-red-400 text-white text-xs sm:text-base px-4 py-2 rounded-md hover:bg-red-600 transition">
-            Add To Bag
+          <button class="bg-red-400 text-white text-xs px-2 py-1 sm:text-base sm:px-4 sm:py-2 rounded-md hover:bg-red-600 transition font-semibold tracking-wide">
+            Add To Bag 
+            <span class="hidden sm:inline">🛍</span>
           </button>
-          <button class="bg-red-400 text-white text-xs sm:text-base px-4 py-2 rounded-md hover:bg-red-600 transition">
-            Like
+          <button class="bg-red-400 text-white text-xs px-2 py-1 sm:text-base sm:px-4 sm:py-2 rounded-md hover:bg-red-600 transition font-semibold tracking-wide">
+            Like 
+            <span class="hidden sm:inline">💖</span>
           </button>
         </div>
+        
+        
+        
+        
         
         
         
