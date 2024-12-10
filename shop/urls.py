@@ -3,14 +3,14 @@ from django.urls import path
 from django.conf import settings  # Import settings
 from django.conf.urls.static import static  # Import static for media handling
 from . import views
-
+# <!-- {% url 'ProductView' product.id %} -->
 urlpatterns = [
     path('', views.index, name='ShopHome'),
     path('ContactUs/', views.contactus, name='ContactUs'),
     path('AboutUs/', views.aboutus, name='AboutUs'),
     path('TrackingStatus/', views.trackingstatus, name='TrackingStatus'),
     path('Search/', views.search, name='Search'),
-    path('ProductView/', views.productview, name='ProductView'),
+    path('product', views.ProductView, name='ProductView'),
     path('CheckOut/', views.checkout, name='CheckOut'),
 ]
 

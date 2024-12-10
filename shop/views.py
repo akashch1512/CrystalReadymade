@@ -49,7 +49,7 @@ def contactus(request):
 def search(request):
     return render(request,'shop/search.html')
 
-def productview(request):
+def ProductView(request):
     return render(request,'shop/productview.html')
 
 def checkout(request):
