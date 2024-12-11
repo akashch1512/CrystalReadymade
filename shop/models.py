@@ -42,7 +42,7 @@ class EightElementSection(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_profile_photo = models.BinaryField(blank=True, null=True)  # Store the image as binary data
+    user_profile_photo = models.CharField(blank=True, null=True)
     mobile = models.CharField(max_length=16, blank=True, null=True)
     address_line_one = models.CharField(max_length=255, blank=True, null=True)
     address_line_two = models.CharField(max_length=255, blank=True, null=True)

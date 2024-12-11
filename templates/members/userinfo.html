@@ -254,24 +254,37 @@
     </a>
   </div>
 
-
-<!-- form -->
-<form class="row g-3 p-5" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <div class="profile-container">
-    <div class="profile-img-wrapper">
-        <img src="https://i.pinimg.com/736x/1e/94/7d/1e947dfcaad552afa209bceebbfac47b.jpg" alt="User Profile" class="profile-img">
-        <div class="edit-overlay">
-            <label for="imageUpload" class="edit-label">Edit Image</label>
-            <input type="file" id="imageUpload" name="profile_photo" accept="image/*" class="upload-input">
-        </div>
-    </div>
-    
-    <p class="text-bold photo-label mt-4 text-2xl">Profile Photo</p>
-    <br></br>
-    <hr>
-    <br></br>
+  <div 
+  class="alert bg-red-200 alert-dismissible fade show fixed top-4 left-1/2 transform -translate-x-1/2 z-50" 
+  role="alert"
+  style="font-size: 0.7rem;"
+>
+  Remember to click <strong>submit edit</strong> button after uploading photo <br>or making any chnage
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="margin: 0;"></button>
 </div>
+
+
+  <form class="row g-3 p-5" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="profile-container">
+        <div class="profile-img-wrapper">
+            {% if user_profile_photo %}
+                <img src="{{ user_profile_photo }}" alt="User Profile" class="profile-img">
+            {% else %}
+                <img src="https://i.pinimg.com/736x/1e/94/7d/1e947dfcaad552afa209bceebbfac47b.jpg" alt="Default Image" class="profile-img">
+            {% endif %}
+            <div class="edit-overlay">
+                <label for="imageUpload" class="edit-label">Edit Image</label>
+                <input type="file" id="imageUpload" name="profile_photo" accept="image/*" class="upload-input">
+            </div>
+        </div>
+        
+        <p class="text-bold photo-label mt-4 text-2xl">Profile Photo</p>
+        <br>
+        <hr>
+        <br>
+    </div>
+
   <!-- First name field -->
   <div class="col-md-4">
     <label for="validationServer01" class="form-label">First name</label>
