@@ -1,24 +1,96 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib import messages
-
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.core.files.storage import default_storage
-from shop.models import Profile
-
-
-import requests
-import base64
-
-IMGUR_CLIENT_ID = '9d14773d02e6ac0'
-
-
+from shop.models import Product
 import base64
 import requests
 
 IMGUR_CLIENT_ID = '9d14773d02e6ac0'
 
+# Function to display all products
+def view_products(request):
+    products = Product.objects.all()  # Fetch all products from DB
+    return render(request, 'members/products.html', {'products': products})
+
+# Function to edit a product
+def edit_product(request, product_id):
+    # Fetch the product or return 404 if it doesn't exist
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.method == 'POST':
+        # Handle form submission for editing product details
+        product.name = request.POST.get("name")
+        product.slug = request.POST.get("slug")
+        product.original_price = request.POST.get("original_price")
+        product.discounted_price = request.POST.get("discounted_price")
+        product.stock_quantity = request.POST.get("stock_quantity")
+        product.short_description = request.POST.get("short_description")
+        product.detailed_description = request.POST.get("detailed_description")
+        product.category = request.POST.get("category")
+        product.tags = request.POST.get("tags")
+        product.sku = request.POST.get("sku")
+        product.brand = request.POST.get("brand")
+        product.weight = request.POST.get("weight")
+        product.dimensions = request.POST.get("dimensions")
+        
+        product.save()
+        return HttpResponse("Product updated successfully!")
+
+    # Render the edit page
+    return render(request, 'members/edit_product.html', {'product': product})
+
+def addproduct(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        slug = request.POST.get("slug")
+        original_price = request.POST.get("original_price")
+        discounted_price = request.POST.get("discounted_price")
+        stock_quantity = request.POST.get("stock_quantity")
+        short_description = request.POST.get("short_description")
+        detailed_description = request.POST.get("detailed_description")
+        category = request.POST.get("category")
+        tags = request.POST.get("tags")
+        sku = request.POST.get("sku")
+        brand = request.POST.get("brand")
+        weight = request.POST.get("weight")
+        dimensions = request.POST.get("dimensions")
+
+        # Handle main image upload
+        main_image_file = request.FILES.get("main_image")
+        main_image_url = upload_to_imgur(main_image_file) if main_image_file else None
+
+        # Handle additional images upload
+        additional_image_files = request.FILES.getlist("additional_images")
+        additional_image_urls = [
+            upload_to_imgur(image) for image in additional_image_files
+        ]
+        additional_images_json = additional_image_urls if additional_image_urls else None
+
+        # Create and save the product
+        product = Product(
+            name=name,
+            slug=slug,
+            main_image=main_image_url,
+            additional_images=additional_images_json,
+            original_price=original_price,
+            discounted_price=discounted_price,
+            stock_quantity=stock_quantity,
+            short_description=short_description,
+            detailed_description=detailed_description,
+            category=category,
+            tags=tags,
+            sku=sku,
+            brand=brand,
+            weight=weight,
+            dimensions=dimensions,
+        )
+        product.save()
+        return render(request,'members/products.html')
+
+    return render(request,'members/add.html')
 
 def upload_to_imgur(image_file):
     """Uploads image to Imgur and returns the URL."""

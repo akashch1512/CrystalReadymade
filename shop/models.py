@@ -1,20 +1,66 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.db import models
 
 class Product(models.Model):
-    product_name = models.CharField(max_length=50)  # Name of the product
-    image = models.ImageField(upload_to="shop/images", default="", null=True, blank=True)
-    original_price = models.DecimalField(max_digits=10, decimal_places=2, default="")  # Product price
-    discounted_price = models.DecimalField(max_digits=10, decimal_places=2, default="")  # Product price
-    description = models.TextField()  # Detailed description
-    published_date = models.DateField()  # Date when the product was published
-    category = models.CharField(max_length=50,default="")
-    category = models.CharField(max_length=50,default="")
+    # Basic Details
+    name = models.CharField(max_length=100, verbose_name="Product Name")
+    slug = models.SlugField(unique=True, blank=True, null=True, help_text="Unique identifier for the product URL")
+    
+    # Image Handling - For multiple images
+    main_image = models.CharField(max_length=255, blank=True, null=True, verbose_name="Main Image")
+    additional_images = models.JSONField(blank=True, null=True, help_text="Store additional image URLs as a JSON array")
 
+    # Pricing Details
+    original_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Original Price")
+    discounted_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, verbose_name="Discounted Price")
+    
+    # Inventory and Stock
+    stock_quantity = models.PositiveIntegerField(default=0, verbose_name="Stock Quantity")
+    is_available = models.BooleanField(default=True, verbose_name="Is Available")
+
+    # Description and Features
+    short_description = models.CharField(max_length=255, blank=True, verbose_name="Short Description")
+    detailed_description = models.TextField(blank=True, verbose_name="Detailed Description")
+
+    # Product Categories and Tags
+    category = models.CharField(max_length=50, verbose_name="Category")
+    tags = models.CharField(max_length=255, blank=True, help_text="Comma-separated tags for the product")
+
+    # Timestamps
+    published_date = models.DateField(auto_now_add=True, verbose_name="Published Date")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Last Updated")
+
+    # Metadata
+    sku = models.CharField(max_length=100, unique=True, verbose_name="SKU")
+    brand = models.CharField(max_length=100, blank=True, verbose_name="Brand")
+    weight = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Weight (kg)")
+    dimensions = models.CharField(max_length=50, blank=True, help_text="Product dimensions (e.g., LxWxH)")
+
+    # SEO Fields
+    meta_title = models.CharField(max_length=100, blank=True, help_text="Meta title for SEO")
+    meta_description = models.TextField(blank=True, help_text="Meta description for SEO")
 
     def __str__(self):
-        return self.product_name
+        return self.name
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
+
+# Separate model for managing multiple images per product
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, related_name="images", on_delete=models.CASCADE)
+    image = models.CharField(max_length=255, blank=True, null=True, verbose_name="Product Image")
+    alt_text = models.CharField(max_length=255, blank=True, verbose_name="Alt Text")
+    
+    def __str__(self):
+        return f"Image for {self.product.name}"
+
+    class Meta:
+        verbose_name = "Product Image"
+        verbose_name_plural = "Product Images"
     
 class User_auth(models.Model):
     Email = models.EmailField()
