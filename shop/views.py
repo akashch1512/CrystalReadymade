@@ -1,11 +1,7 @@
-from django.shortcuts import render
-# from django.http import HttpResponse
-# from .models import EightElementSection, Product
-
-# Create your views here.
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from .models import SectionElement, Product
 
 def index(request):
     # Handle Search Query
@@ -35,10 +31,23 @@ def index(request):
             else:
                 messages.error(request, 'Invalid username or password. Please try again.')
 
+    
     # Show popup only if the user is not authenticated
     show_popup = not request.user.is_authenticated
-    return render(request, 'shop/index.html', {'show_popup': show_popup})
-
+    trending = SectionElement.get_by_name("Trending")
+    top_rated = SectionElement.get_by_name("Top Rated")
+    new_arrivals = SectionElement.get_by_name("New Arrivals")
+    best_sellers = SectionElement.get_by_name("best sellers")
+    new_products = SectionElement.get_by_name("New Products")
+    context = {
+    'show_popup': show_popup,
+    'trending': trending,
+    'new_arrivals' : new_arrivals,
+    'top_rated' : top_rated,
+    'new_products': new_products,
+    'best_sellers' : best_sellers,
+    }
+    return render(request, 'shop/index.html', context)
 
 def aboutus(request):
     return render(request,'shop/aboutus.html')
@@ -49,8 +58,9 @@ def contactus(request):
 def search(request):
     return render(request,'shop/search.html')
 
-def ProductView(request):
-    return render(request,'shop/productview.html')
+def ProductView(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    return render(request, 'shop/productview.html', {'product': product})
 
 def checkout(request):
     return render(request,'shop/checkout.html')
