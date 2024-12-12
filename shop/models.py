@@ -40,12 +40,19 @@ class Product(models.Model):
     meta_title = models.CharField(max_length=100, blank=True, help_text="Meta title for SEO")
     meta_description = models.TextField(blank=True, help_text="Meta description for SEO")
 
+    @classmethod
+    def get_all(cls):
+        """Fetch all products."""
+        return cls._products
+
     def __str__(self):
         return self.name
 
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
+
+    
 
 # Separate model for managing multiple images per product
 class ProductImage(models.Model):

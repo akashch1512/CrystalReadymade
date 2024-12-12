@@ -9,13 +9,7 @@ def index(request):
         search_query = request.POST.get("search_query", "").strip()
         if search_query:
             # Mock product data
-            products = [
-                {'name': 'Akash is for sale', 'description': 'Shop products from small business brands sold in Amazon\'s store. Discover more about the small businesses partnering with Amazon and Amazon\'s commitment to empowering them.', 'price': 99.99, 'image_url': 'https://via.placeholder.com/150'},
-                {'name': 'Akash is for sale', 'description': 'Shop products from small business brands sold in Amazon\'s store. Discover more about the small businesses partnering with Amazon and Amazon\'s commitment to empowering them.', 'price': 49.99, 'image_url': 'https://via.placeholder.com/150'},
-                {'name': 'Akash is for sale', 'description': 'Shop products from small business brands sold in Amazon\'s store. Discover more about the small businesses partnering with Amazon and Amazon\'s commitment to empowering them.', 'price': 29.99, 'image_url': 'https://via.placeholder.com/150'},
-                {'name': 'Akash is for sale', 'description': 'Shop products from small business brands sold in Amazon\'s store. Discover more about the small businesses partnering with Amazon and Amazon\'s commitment to empowering them.', 'price': 19.99, 'image_url': 'https://via.placeholder.com/150'},
-                {'name': 'Akash is for sale', 'description': 'Shop products from small business brands sold in Amazon\'s store. Discover more about the small businesses partnering with Amazon and Amazon\'s commitment to empowering them.', 'price': 9.99, 'image_url': 'https://via.placeholder.com/150'},
-            ]
+            products = Product.objects.all()
             # Render the search results page
             return render(request, 'shop/search.html', {'search_query': search_query, 'products': products})
 
@@ -39,6 +33,7 @@ def index(request):
     new_arrivals = SectionElement.get_by_name("New Arrivals")
     best_sellers = SectionElement.get_by_name("best sellers")
     new_products = SectionElement.get_by_name("New Products")
+    
     context = {
     'show_popup': show_popup,
     'trending': trending,
