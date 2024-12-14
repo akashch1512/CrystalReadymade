@@ -45,14 +45,21 @@ class Product(models.Model):
         """Fetch all products."""
         return cls._products
 
+    @classmethod
+    def get_by_name(cls, section_name):
+        return cls.objects.filter(name=section_name).first()
+    
+    @classmethod
+    def get_by_id(cls, section_id):
+        return cls.objects.filter(id=section_id).first()
+
+
     def __str__(self):
         return self.name
 
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
-
-    
 
 # Separate model for managing multiple images per product
 class ProductImage(models.Model):
@@ -74,6 +81,22 @@ class User_auth(models.Model):
     def __str__(self):
         return self.Email
     
+class Deal_of_the_day_section(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Dont_Change_this")
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, related_name="section_product_product", null=True, blank=True)
+    Days = models.PositiveIntegerField(default=0, verbose_name="Days")
+    Hours = models.PositiveIntegerField(default=0, verbose_name="Hours")
+    min = models.PositiveIntegerField(default=0, verbose_name="Min")
+    sec = models.PositiveIntegerField(default=0, verbose_name="Sec")
+
+    def __str__(self):
+        return self.name
+    
+    @classmethod
+    def get_by_name(cls, section_name):
+        return cls.objects.filter(name=section_name).first()
+
+
 class SectionElement(models.Model):
     name = models.CharField(max_length=100, verbose_name="Section Name")
     
@@ -98,9 +121,12 @@ class SectionElement(models.Model):
     def get_by_name(cls, section_name):
         return cls.objects.filter(name=section_name).first()
 
+from django.contrib.auth.models import User
+from django.db import models
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_profile_photo = models.CharField(blank=True, null=True)
+    user_profile_photo = models.CharField(max_length=255, blank=True, null=True)  # Added max_length
     mobile = models.CharField(max_length=16, blank=True, null=True)
     address_line_one = models.CharField(max_length=255, blank=True, null=True)
     address_line_two = models.CharField(max_length=255, blank=True, null=True)
@@ -108,6 +134,9 @@ class Profile(models.Model):
     city = models.CharField(max_length=100, blank=True, null=True)
     state = models.CharField(max_length=100, blank=True, null=True)
     zip = models.CharField(max_length=10, blank=True, null=True)
+
+    # Allow users to like multiple products
+    liked_products = models.ManyToManyField('Product', blank=True, related_name='liked_by')
 
     def __str__(self):
         return self.user.username

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from .models import SectionElement, Product , Profile
+from .models import SectionElement, Product , Profile, Deal_of_the_day_section
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -34,6 +34,8 @@ def index(request):
     new_arrivals = SectionElement.get_by_name("New Arrivals")
     best_sellers = SectionElement.get_by_name("best sellers")
     new_products = SectionElement.get_by_name("New Products")
+    deal_of_the_day_1 = Deal_of_the_day_section.get_by_name('Product1')
+    deal_of_the_day_2 = Deal_of_the_day_section.get_by_name('Product2')
     
     
     context = {
@@ -43,6 +45,8 @@ def index(request):
     'top_rated' : top_rated,
     'new_products': new_products,
     'best_sellers' : best_sellers,
+    'deal_of_the_day_1' : deal_of_the_day_1,
+    'deal_of_the_day_2' : deal_of_the_day_2,
     }
     return render(request, 'shop/index.html', context)
 
