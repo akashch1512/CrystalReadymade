@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from .models import SectionElement, Product , Deal_of_the_day_section, Profile
+from .models import SectionElement, Product , Profile
 from django.contrib.auth.decorators import login_required
 
 def index(request):
