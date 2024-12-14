@@ -34,8 +34,6 @@ def index(request):
     new_arrivals = SectionElement.get_by_name("New Arrivals")
     best_sellers = SectionElement.get_by_name("best sellers")
     new_products = SectionElement.get_by_name("New Products")
-    deal_of_the_day_1 = Deal_of_the_day_section.get_by_name('Product1')
-    deal_of_the_day_2 = Deal_of_the_day_section.get_by_name('Product2')
     
     
     context = {
@@ -45,8 +43,6 @@ def index(request):
     'top_rated' : top_rated,
     'new_products': new_products,
     'best_sellers' : best_sellers,
-    'deal_of_the_day_1' : deal_of_the_day_1,
-    'deal_of_the_day_2' : deal_of_the_day_2,
     }
     return render(request, 'shop/index.html', context)
 
