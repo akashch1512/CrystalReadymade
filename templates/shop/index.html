@@ -2261,7 +2261,7 @@
                 <div class="showcase">
                   
                   <div class="showcase-banner">
-                    <img src="{% static '/shop/images/products/shampoo.jpg' %}" alt="shampoo, conditioner & facewash packs" class="showcase-img">
+                    <img src="{{ deal_of_the_day_1.product.main_image }}" alt="shampoo, conditioner & facewash packs" class="showcase-img">
                   </div>
 
                   <div class="showcase-content">
@@ -2274,19 +2274,30 @@
                       <ion-icon name="star-outline"></ion-icon>
                     </div>
 
-                    <a href="#">
-                      <h3 class="showcase-title">shampoo, conditioner & facewash packs</h3>
+                    <a href="{% url 'ProductView' deal_of_the_day_1.product.id %}">
+                      <h3 class="showcase-title">{{ deal_of_the_day_1.product.name }}</h3>
                     </a>
 
-                    <p class="showcase-desc">
-                      Lorem ipsum dolor sit amet consectetur Lorem ipsum
-                      dolor dolor sit amet consectetur Lorem ipsum dolor
+                    <p class="showcase-desc line-clamp-2">
+                      {{ deal_of_the_day_1.product.short_description }}
                     </p>
+                    <style>
+                      .line-clamp-2 {
+                      display: -webkit-box;        /* Required for webkit browsers */
+                      -webkit-line-clamp: 2;      /* Limit text to 2 lines (Webkit-specific) */
+                      -webkit-box-orient: vertical; /* Specify vertical orientation for Webkit */
+                      overflow: hidden;           /* Hide the overflow text */
+                      text-overflow: ellipsis;    /* Add '...' to truncated text */
+                      line-clamp: 2;              /* Standard property for future compatibility */
+                    }
+                    
+                    </style>
+                    
 
                     <div class="price-box">
-                      <p class="price">₹150.00</p>
+                      <p class="price">₹{{deal_of_the_day_1.product.discounted_price}}</p>
 
-                      <del>₹200.00</del>
+                      <del>₹{{deal_of_the_day_1.product.original_price}}</del>
                     </div>
 
                     <button class="add-cart-btn">add to cart</button>
@@ -2294,11 +2305,11 @@
                     <div class="showcase-status">
                       <div class="wrapper">
                         <p>
-                          already sold: <b>20</b>
+                          already sold: <b>{{deal_of_the_day_1.product.stock_quantity}}</b>
                         </p>
 
                         <p>
-                          available: <b>40</b>
+                          available: <b>{{deal_of_the_day_1.product.stock_quantity}}</b>
                         </p>
                       </div>
 
@@ -2315,24 +2326,24 @@
 
                         <div class="countdown-content">
 
-                          <p class="display-number">360</p>
+                          <p class="display-number">{{deal_of_the_day_1.Days}}</p>
 
                           <p class="display-text">Days</p>
 
                         </div>
 
                         <div class="countdown-content">
-                          <p class="display-number">24</p>
+                          <p class="display-number">{{deal_of_the_day_1.Hours}}</p>
                           <p class="display-text">Hours</p>
                         </div>
 
                         <div class="countdown-content">
-                          <p class="display-number">59</p>
+                          <p class="display-number">{{deal_of_the_day_1.min}}</p>
                           <p class="display-text">Min</p>
                         </div>
 
                         <div class="countdown-content">
-                          <p class="display-number">00</p>
+                          <p class="display-number">{{deal_of_the_day_1.sec}}</p>
                           <p class="display-text">Sec</p>
                         </div>
 
@@ -2351,7 +2362,7 @@
                 <div class="showcase">
               
                   <div class="showcase-banner">
-                    <img src="{% static '/shop/images/products/jewellery-1.jpg' %}" alt="Rose Gold diamonds Earring" class="showcase-img">
+                    <img src="{{ deal_of_the_day_2.product.main_image }}" alt="Rose Gold diamonds Earring" class="showcase-img">
                   </div>
               
                   <div class="showcase-content">
@@ -2365,26 +2376,36 @@
                     </div>
               
                     <h3 class="showcase-title">
-                      <a href="#" class="showcase-title">Rose Gold diamonds Earring</a>
+                      <a href="#" class="showcase-title">{{ deal_of_the_day_2.product.name }}</a>
                     </h3>
               
-                    <p class="showcase-desc">
-                      Lorem ipsum dolor sit amet consectetur Lorem ipsum
-                      dolor dolor sit amet consectetur Lorem ipsum dolor
+                    <p class="showcase-desc line-clamp-2">
+                      {{ deal_of_the_day_1.product.short_description }}
                     </p>
+                    <style>
+                      .line-clamp-2 {
+                      display: -webkit-box;        /* Required for webkit browsers */
+                      -webkit-line-clamp: 2;      /* Limit text to 2 lines (Webkit-specific) */
+                      -webkit-box-orient: vertical; /* Specify vertical orientation for Webkit */
+                      overflow: hidden;           /* Hide the overflow text */
+                      text-overflow: ellipsis;    /* Add '...' to truncated text */
+                      line-clamp: 2;              /* Standard property for future compatibility */
+                    }
+                    
+                    </style>
               
                     <div class="price-box">
-                      <p class="price">₹1990.00</p>
-                      <del>₹2000.00</del>
+                      <p class="price">₹{{deal_of_the_day_2.product.discounted_price}}</p>
+                      <del>₹{{deal_of_the_day_2.product.original_price}}</del>
                     </div>
               
                     <button class="add-cart-btn">add to cart</button>
               
                     <div class="showcase-status">
                       <div class="wrapper">
-                        <p> already sold: <b>15</b> </p>
+                        <p> already sold: <b>{{deal_of_the_day_2.product.stock_quantity}}</b> </p>
               
-                        <p> available: <b>40</b> </p>
+                        <p> available: <b>{{deal_of_the_day_2.product.stock_quantity}}</b> </p>
                       </div>
               
                       <div class="showcase-status-bar"></div>
@@ -2396,22 +2417,22 @@
               
                       <div class="countdown">
                         <div class="countdown-content">
-                          <p class="display-number">360</p>
+                          <p class="display-number">{{deal_of_the_day_2.Days}}</p>
                           <p class="display-text">Days</p>
                         </div>
               
                         <div class="countdown-content">
-                          <p class="display-number">24</p>
+                          <p class="display-number">{{deal_of_the_day_2.Hours}}</p>
                           <p class="display-text">Hours</p>
                         </div>
               
                         <div class="countdown-content">
-                          <p class="display-number">59</p>
+                          <p class="display-number">{{ deal_of_the_day_2.min }}</p>
                           <p class="display-text">Min</p>
                         </div>
               
                         <div class="countdown-content">
-                          <p class="display-number">00</p>
+                          <p class="display-number">{{ deal_of_the_day_2.sec }}</p>
                           <p class="display-text">Sec</p>
                         </div>
                       </div>
@@ -2563,10 +2584,11 @@
                   <!-- <p class="showcase-badge">15%</p> -->
 
                   <div class="showcase-actions">
-
+                    <a href="">
                     <button class="btn-action">
                       <ion-icon name="heart-outline"></ion-icon>
                     </button>
+                  </a>
 
                     <button class="btn-action">
                       <ion-icon name="eye-outline"></ion-icon>
